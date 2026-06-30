@@ -4,6 +4,8 @@ A highly polished, responsive retro terminal-style portfolio built with raw perf
 
 Live local development served via Vite.
 
+![Retro OS Portfolio Preview](public/preview.jpg)
+
 ---
 
 ## ⚡ Features
