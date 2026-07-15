@@ -50,30 +50,31 @@
     transition: background 0.3s, color 0.3s;
   }
 
-  /* CRT scanlines overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      var(--scanline) 0px,
-      var(--scanline) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    pointer-events: none;
-    z-index: 9999;
-  }
+  /* CRT scanlines & flicker vignette - desktop only to prevent mobile scroll rendering glitches */
+  @media (min-width: 769px) {
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        var(--scanline) 0px,
+        var(--scanline) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
 
-  /* CRT flicker */
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.25) 100%);
-    pointer-events: none;
-    z-index: 9998;
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.25) 100%);
+      pointer-events: none;
+      z-index: 9998;
+    }
   }
 
   .page-wrapper {
