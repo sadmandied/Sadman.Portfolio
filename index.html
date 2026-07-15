@@ -448,20 +448,138 @@
 
   .project-item {
     border: 1px solid var(--border);
-    padding: 20px;
     background: var(--box-bg);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    display: block;
+    overflow: hidden;
+  }
+
+  .project-item:hover {
+    background: rgba(128,128,128,0.04);
+    transform: translateX(4px);
+    border-color: var(--fg);
+  }
+
+  .project-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    cursor: pointer;
-    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    padding: 20px;
   }
 
-  .project-item:hover {
-    background: rgba(128,128,128,0.08);
-    transform: translateX(4px);
+  .project-meta {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .drawer-indicator {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    padding: 2px 6px;
+    font-weight: 700;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .project-item:hover .drawer-indicator {
+    color: var(--fg);
     border-color: var(--fg);
+  }
+
+  /* Expandable Console Drawer */
+  .project-drawer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(0,0,0,0.02);
+    border-top: 1px dashed transparent;
+  }
+
+  .project-item.drawer-active .project-drawer {
+    border-top: 1px dashed var(--border);
+  }
+
+  .drawer-content {
+    padding: 20px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .drawer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .drawer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .console-box {
+    border: 1px solid var(--border);
+    padding: 12px;
+    background: var(--bg);
+  }
+
+  .console-label {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+  }
+
+  .console-value {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--fg);
+  }
+
+  .drawer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .drawer-actions {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  }
+
+  .action-btn {
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    background: var(--bg);
+    color: var(--fg);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .action-btn:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .action-hint {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 0.05em;
   }
 
   .project-item .proj-id {
@@ -730,37 +848,132 @@
   <div class="section" id="section-projects">
     <div class="section-header">PROJECTS // WORKS REGISTRY</div>
     <div class="project-list">
-      <div class="project-item reveal-item">
-        <div>
-          <div class="proj-id">// PROJECT_001</div>
-          <div class="proj-name">SADMAN / FRAMES</div>
-          <div class="proj-desc">A premium mobile photography portfolio. Features a custom canvas dust-and-scratches overlay generator, dynamic theme engine, custom image viewer, and integrated Leaflet map displaying global coordinates of shots. Built with zero bulk frameworks.</div>
+      <div class="project-item reveal-item" onclick="toggleProjectDrawer(this)">
+        <div class="project-header">
+          <div>
+            <div class="proj-id">// PROJECT_001</div>
+            <div class="proj-name">SADMAN / FRAMES</div>
+            <div class="proj-desc">A premium mobile photography portfolio. Features a custom canvas dust-and-scratches overlay generator, dynamic theme engine, custom image viewer, and integrated Leaflet map displaying global coordinates of shots. Built with zero bulk frameworks.</div>
+          </div>
+          <div class="project-meta">
+            <span class="proj-status">● LIVE_NODE</span>
+            <span class="drawer-indicator">[+] EXPAND</span>
+          </div>
         </div>
-        <span class="proj-status">● LIVE_NODE</span>
+        <div class="project-drawer">
+          <div class="drawer-content">
+            <div class="drawer-grid">
+              <div class="console-box">
+                <span class="console-label">> CORE STACK:</span>
+                <span class="console-value">HTML5 Canvas / Leaflet.js / ES6 Javascript / CSS Variables</span>
+              </div>
+              <div class="console-box">
+                <span class="console-label">> RUNTIME DIAGNOSTIC:</span>
+                <span class="console-value">[ONLINE] Dynamic coordinate rendering, local dust filters.</span>
+              </div>
+            </div>
+            <div class="drawer-actions">
+              <a href="https://github.com/sadmandied" target="_blank" class="action-btn">// QUERY_SOURCE_REPO</a>
+              <span class="action-hint">Query repository files on GitHub</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="project-item reveal-item">
-        <div>
-          <div class="proj-id">// PROJECT_002</div>
-          <div class="proj-name">DEAD CURRENCIES</div>
-          <div class="proj-desc">Next.js edge currency converter and digital currency tracker. Optimized for edge runtime serverless deployments with instant API conversion data, HSL dark mode variables, and local-storage caching.</div>
+
+      <div class="project-item reveal-item" onclick="toggleProjectDrawer(this)">
+        <div class="project-header">
+          <div>
+            <div class="proj-id">// PROJECT_002</div>
+            <div class="proj-name">DEAD CURRENCIES</div>
+            <div class="proj-desc">Next.js edge currency converter and digital currency tracker. Optimized for edge runtime serverless deployments with instant API conversion data, HSL dark mode variables, and local-storage caching.</div>
+          </div>
+          <div class="project-meta">
+            <span class="proj-status">● ACTIVE</span>
+            <span class="drawer-indicator">[+] EXPAND</span>
+          </div>
         </div>
-        <span class="proj-status">● ACTIVE</span>
+        <div class="project-drawer">
+          <div class="drawer-content">
+            <div class="drawer-grid">
+              <div class="console-box">
+                <span class="console-label">> CORE STACK:</span>
+                <span class="console-value">Next.js (App Router) / Edge API Runtime / Tailwind CSS</span>
+              </div>
+              <div class="console-box">
+                <span class="console-label">> RUNTIME DIAGNOSTIC:</span>
+                <span class="console-value">[ONLINE] Low-latency serverless conversion metrics.</span>
+              </div>
+            </div>
+            <div class="drawer-actions">
+              <a href="https://github.com/sadmandied" target="_blank" class="action-btn">// QUERY_SOURCE_REPO</a>
+              <span class="action-hint">Query repository files on GitHub</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="project-item reveal-item">
-        <div>
-          <div class="proj-id">// PROJECT_003</div>
-          <div class="proj-name">SPORTS LEAGUE MANAGER</div>
-          <div class="proj-desc">Java NetBeans JSP administration platform for league scheduling and analytics. Handles database synchronization, automated tournament grids, referee allocation algorithms, and robust local hosting.</div>
+
+      <div class="project-item reveal-item" onclick="toggleProjectDrawer(this)">
+        <div class="project-header">
+          <div>
+            <div class="proj-id">// PROJECT_003</div>
+            <div class="proj-name">SPORTS LEAGUE MANAGER</div>
+            <div class="proj-desc">Java NetBeans JSP administration platform for league scheduling and analytics. Handles database synchronization, automated tournament grids, referee allocation algorithms, and robust local hosting.</div>
+          </div>
+          <div class="project-meta">
+            <span class="proj-status">○ ARCHIVED</span>
+            <span class="drawer-indicator">[+] EXPAND</span>
+          </div>
         </div>
-        <span class="proj-status">○ ARCHIVED</span>
+        <div class="project-drawer">
+          <div class="drawer-content">
+            <div class="drawer-grid">
+              <div class="console-box">
+                <span class="console-label">> CORE STACK:</span>
+                <span class="console-value">Java / NetBeans JSP / MySQL / Apache Tomcat Server</span>
+              </div>
+              <div class="console-box">
+                <span class="console-label">> RUNTIME DIAGNOSTIC:</span>
+                <span class="console-value">[ARCHIVED] Local offline tournament grids compiled.</span>
+              </div>
+            </div>
+            <div class="drawer-actions">
+              <a href="https://github.com/sadmandied" target="_blank" class="action-btn">// INQUIRE_ARCHIVE</a>
+              <span class="action-hint">Access legacy project archive registry</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="project-item reveal-item">
-        <div>
-          <div class="proj-id">// PROJECT_004</div>
-          <div class="proj-name">RETRO_OS PORTFOLIO</div>
-          <div class="proj-desc">This digital console website. High-fidelity ASCII art rendering engine, keystroke clack audio synthesizer, double startup BIOS beep, duotone themes, and dynamic layout transitions. Built in static HTML, CSS, and JS.</div>
+
+      <div class="project-item reveal-item" onclick="toggleProjectDrawer(this)">
+        <div class="project-header">
+          <div>
+            <div class="proj-id">// PROJECT_004</div>
+            <div class="proj-name">RETRO_OS PORTFOLIO</div>
+            <div class="proj-desc">This digital console website. High-fidelity ASCII art rendering engine, keystroke clack audio synthesizer, double startup BIOS beep, duotone themes, and dynamic layout transitions. Built in static HTML, CSS, and JS.</div>
+          </div>
+          <div class="project-meta">
+            <span class="proj-status">● MAIN_BUILD</span>
+            <span class="drawer-indicator">[+] EXPAND</span>
+          </div>
         </div>
-        <span class="proj-status">● MAIN_BUILD</span>
+        <div class="project-drawer">
+          <div class="drawer-content">
+            <div class="drawer-grid">
+              <div class="console-box">
+                <span class="console-label">> CORE STACK:</span>
+                <span class="console-value">Vite / HTML5 Canvas SAMPLER / Web Audio API / CSS Grid</span>
+              </div>
+              <div class="console-box">
+                <span class="console-label">> RUNTIME DIAGNOSTIC:</span>
+                <span class="console-value">[OPERATIONAL] Real-time video frame conversion at 60fps.</span>
+              </div>
+            </div>
+            <div class="drawer-actions">
+              <a href="javascript:void(0)" onclick="triggerSystemReboot()" class="action-btn">// RUN_DIAGNOSTIC_REBOOT</a>
+              <span class="action-hint">Simulate a complete system shutdown and reboot sequence</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1080,6 +1293,74 @@
         drawFrame();
       });
     }
+  }
+
+
+  // --- INTERACTIVE PROJECT EXPANDABLE DRAWERS ---
+  function toggleProjectDrawer(element) {
+    // If click was on the action-btn link, don't toggle drawer
+    if (event.target.closest('.action-btn')) return;
+
+    const isActive = element.classList.contains('drawer-active');
+    
+    // Close all other drawers
+    document.querySelectorAll('.project-item').forEach(item => {
+      item.classList.remove('drawer-active');
+      const drawer = item.querySelector('.project-drawer');
+      if (drawer) {
+        drawer.style.maxHeight = '0';
+      }
+      const indicator = item.querySelector('.drawer-indicator');
+      if (indicator) {
+        indicator.textContent = '[+] EXPAND';
+      }
+    });
+
+    if (!isActive) {
+      element.classList.add('drawer-active');
+      const drawer = element.querySelector('.project-drawer');
+      if (drawer) {
+        drawer.style.maxHeight = drawer.scrollHeight + 'px';
+      }
+      const indicator = element.querySelector('.drawer-indicator');
+      if (indicator) {
+        indicator.textContent = '[-] COLLAPSE';
+      }
+      playBeep(650, 0.06); // play satisfying beep feedback
+    } else {
+      playBeep(550, 0.04); // play closing beep
+    }
+  }
+
+  // --- MOCK SYSTEM REBOOT EASTER EGG ---
+  function triggerSystemReboot() {
+    event.stopPropagation(); // prevent closing drawer
+    
+    // Shutdown overlay transition
+    document.body.classList.remove('booted');
+    playBeep(440, 0.15);
+    setTimeout(() => playBeep(880, 0.15), 180);
+    
+    const nameEl = document.querySelector('.hero-name');
+    nameEl.innerHTML = '<span class="typing-cursor"></span>';
+    
+    // Restart typewriter typing sequence
+    setTimeout(() => {
+      const originalText = "SADMAN FAHMID RAJ";
+      let charIdx = 0;
+      function typeName() {
+        if (charIdx <= originalText.length) {
+          nameEl.innerHTML = originalText.substring(0, charIdx) + '<span class="typing-cursor"></span>';
+          charIdx++;
+          playKeyClick();
+          setTimeout(typeName, 2 + Math.random() * 4); // ultra fast
+        } else {
+          nameEl.innerHTML = originalText + '<span class="cursor-dot">.</span>';
+          setTimeout(revealAscii, 250);
+        }
+      }
+      typeName();
+    }, 500);
   }
 
   // --- CYBER DECODER TEXT SHUFFLE EFFECT ---
