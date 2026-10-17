@@ -1,5 +1,11 @@
 # SADMAN FAHMID RAJ // RETRO_OS v2.64
 
+[![Vite Build Verification](https://github.com/sadmandied/Sadman.Portfolio/actions/workflows/node-ci.yml/badge.svg)](https://github.com/sadmandied/Sadman.Portfolio/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/)
+[![CSS3](https://img.shields.io/badge/CSS3-Flexbox_&_Grid-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/)
+
 A highly polished, responsive retro terminal-style portfolio built with raw performance and premium aesthetics in mind. Featuring a real-time video-to-ASCII canvas processing engine, Web Audio keystroke mechanical synthesizers, and staggered scroll reveals.
 
 Live local development served via Vite.
